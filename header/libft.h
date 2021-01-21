@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:53:07 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/05 12:14:35 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/01/21 12:52:15 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,9 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+int					ft_what_is_read(char **tmp, char **line);
+char				*ft_read_it(char **tmp, int fd);
+int					get_next_line(int fd, char **line);
+char				*ft_strncpy(char *dst, char *src, int n);
 
 #endif

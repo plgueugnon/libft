@@ -6,7 +6,7 @@
 #    By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/05 10:07:13 by pgueugno          #+#    #+#              #
-#    Updated: 2021/01/21 11:49:06 by pgueugno         ###   ########.fr        #
+#    Updated: 2021/01/21 12:42:12 by pgueugno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ SRCS		=	$(notdir $(shell find $(SRCS_DIR) -type f -name *.c))
 ###############################################################################
 
 CC		=	@gcc
-CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR)
+CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR) -g
+BUFSIZE		=	-D BUFFER_SIZE=32
 RM		=	@rm -f
 AR		=	@ar -rcs
 
@@ -63,9 +64,9 @@ init:
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				@ echo "\t$(_YELLOW) compiling... $*.c"
-				${CC} ${CFLAGS} -c $< -o $@
+				$(CC) $(CFLAGS) $(BUFSIZE) -c $< -o $@
 
-$(NAME): ${OBJS}
+$(NAME): $(OBJS)
 		@ echo "\t$(_YELLOW)[Creating library...]"
 		$(AR) $(NAME) $(OBJS)
 
