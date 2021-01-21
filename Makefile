@@ -6,45 +6,76 @@
 #    By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/05 10:07:13 by pgueugno          #+#    #+#              #
-#    Updated: 2021/01/07 14:46:18 by pgueugno         ###   ########.fr        #
+#    Updated: 2021/01/21 11:49:06 by pgueugno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME=	libft.a
-CC=		gcc
-CFLAGS=	-Wall -Wextra -Werror -I.
-RM=		rm -rf
+###############################################################################
+#				Filename output				      #
+###############################################################################
 
-SRC=	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
-		ft_isdigit.c ft_isprint.c ft_itoa.c ft_memccpy.c ft_memchr.c ft_memcmp.c \
-		ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c \
-		ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c \
-		ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c \
-		ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
-		ft_tolower.c ft_toupper.c
+NAME		=	libft.a
 
-BONUS_SRC=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-			ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c 
+###############################################################################
+#			Sources and objects directories			      #
+###############################################################################
 
-OBJS=	${SRC:.c=.o}
-BONUS_OBJS=	${BONUS_SRC:.c=.o}
+HEADERS_DIR	=	header
+SRCS_DIR	=	srcs
+OBJS_DIR	=	objs
 
-all:	$(NAME)
+###############################################################################
+#				Sources filenames			      #
+###############################################################################
 
-%.o: %.c
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+SRCS		=	$(notdir $(shell find $(SRCS_DIR) -type f -name *.c))
+
+###############################################################################
+#				Commands and arguments			      #
+###############################################################################
+
+CC		=	@gcc
+CFLAGS		=	-Wall -Wextra -Werror -I$(HEADERS_DIR)
+RM		=	@rm -f
+AR		=	@ar -rcs
+
+###############################################################################
+#				Defining colors				      #
+###############################################################################
+
+_RED		=	\x1b[31m
+_GREEN		=	\x1b[32m
+_YELLOW		=	\x1b[33m
+
+###############################################################################
+#				Compiling				      #
+###############################################################################
+
+OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
+
+
+
+all:	init $(NAME)
+	@ echo "$(_GREEN)[libft.a created]"
+
+init:	
+	@ echo "$(_YELLOW)[Initialize libft]"
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+				@ echo "\t$(_YELLOW) compiling... $*.c"
+				${CC} ${CFLAGS} -c $< -o $@
 
 $(NAME): ${OBJS}
-		ar -rcs $(NAME) $(OBJS)
-
-bonus:	${OBJS} ${BONUS_OBJS}
-		ar -rcs ${NAME} ${OBJS} ${BONUS_OBJS}
+		@ echo "\t$(_YELLOW)[Creating library...]"
+		$(AR) $(NAME) $(OBJS)
 
 clean:
-		${RM} ${OBJS} ${BONUS_OBJS}
+		@ echo "$(_RED)[cleaning objects files]"
+		$(RM) $(OBJS)
 
 fclean: clean
-		${RM} ${NAME}
+		@ echo "$(_RED)[cleaning objects and library files]"
+		$(RM) $(NAME)
 
 re:	fclean all
 
