@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_numlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 15:57:34 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/25 10:13:19 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/01/25 10:56:45 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/01/25 11:20:27 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_numlen(int n)
 {
-	if (*s == '\0')
-		return (0);
-	return (ft_strlen(s + 1) + 1);
+	if (n < 0)
+		n *= -1;
+	if (n < 10)
+		return (1);
+	return (ft_numlen(n / 10) + 1);
 }

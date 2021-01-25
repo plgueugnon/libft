@@ -1,20 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 15:57:34 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/25 10:13:19 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/01/25 10:31:50 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/01/25 10:33:36 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_putnbr(long int n)
 {
-	if (*s == '\0')
-		return (0);
-	return (ft_strlen(s + 1) + 1);
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n *= -1;
+	}
+	if (n < 10)
+	{
+		n += 48;
+		write(1, &n, 1);
+	}
+	else if (n >= 10)
+	{
+		ft_putnbr(n / 10);
+		n = (n % 10) + 48;
+		write(1, &n, 1);
+	}
 }

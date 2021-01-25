@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 15:57:34 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/25 10:13:19 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/01/25 10:28:05 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/01/25 10:29:16 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+void	ft_putstr(char *s)
 {
-	if (*s == '\0')
-		return (0);
-	return (ft_strlen(s + 1) + 1);
+	while (*s)
+	{
+		write(1, &(*s), 1);
+		s++;
+	}
 }
