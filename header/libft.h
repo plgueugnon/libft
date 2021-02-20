@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:53:07 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/25 11:16:57 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/02/20 18:06:18 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void				ft_putnbr(long int n);
 void				ft_putstr(char *s);
 int					ft_numlen(int n);
 char				*ft_strstr(char *haystack, char *needle);
+t_list				*ft_lst_append(t_list *list, void *content);
 
 #endif
