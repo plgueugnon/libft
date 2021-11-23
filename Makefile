@@ -6,7 +6,7 @@
 #    By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/05 10:07:13 by pgueugno          #+#    #+#              #
-#    Updated: 2021/01/21 12:42:12 by pgueugno         ###   ########.fr        #
+#    Updated: 2021/11/23 17:47:04 by pgueugno         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,12 +55,12 @@ _YELLOW		=	\x1b[33m
 OBJS		=	$(addprefix $(OBJS_DIR)/, $(SRCS:.c=.o))
 
 
-
 all:	init $(NAME)
 	@ echo "$(_GREEN)[libft.a created]"
 
 init:	
 	@ echo "$(_YELLOW)[Initialize libft]"
+	@ $(shell mkdir -p $(OBJS_DIR))
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 				@ echo "\t$(_YELLOW) compiling... $*.c"

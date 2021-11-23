@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 10:31:49 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/06 15:54:16 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/11/23 17:55:16 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/11/23 17:55:18 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void **))
+char	*ft_strndup(const char *s, int len)
 {
-	t_list	*tmp;
+	int		i;
+	char	*dst;
 
-	tmp = NULL;
-	if (*lst)
+	i = 0;
+	dst = malloc(sizeof(char) * (len + 1));
+	if (!dst)
+		return (0);
+	while (i < len)
 	{
-		while (*lst)
-		{
-			tmp = *lst;
-			*lst = (*lst)->next;
-			del(&tmp->content);
-			free(tmp);
-		}
+		dst[i] = s[i];
+		i++;
 	}
-	*lst = NULL;
+	dst[i] = '\0';
+	return (dst);
 }

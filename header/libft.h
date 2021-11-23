@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 15:53:07 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/02/20 18:06:18 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/11/23 17:43:51 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/11/23 17:45:11 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,20 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# define BUFFER_SIZE 32
 
-typedef struct		s_list
+typedef struct s_list
 {
 	void			*content;
 	struct s_list	*next;
 }					t_list;
+
+typedef struct s_dlist
+{
+	void			*content;
+	struct s_dlist	*next;
+	struct s_dlist	*prev;
+}				t_dlist;
 
 size_t				ft_strlen(const char *s);
 void				*ft_memset(void *b, int c, size_t len);
@@ -45,7 +53,9 @@ size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 int					ft_atoi(const char *str);
+long				ft_atol(const char *str);
 char				*ft_strdup(const char *s1);
+char				*ft_strndup(const char *s, int len);
 void				*ft_calloc(size_t count, size_t size);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
 char				*ft_strjoin(char const *s1, char const *s2);
@@ -63,10 +73,10 @@ int					ft_lstsize(t_list *lst);
 t_list				*ft_lstlast(t_list *lst);
 void				ft_lstadd_back(t_list **alst, t_list *new);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
-void				ft_lstclear(t_list **lst, void (*del)(void *));
+void				ft_lstclear(t_list **lst, void (*del)(void **));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
-						void (*del)(void *));
+						void (*del)(void **));
 int					ft_what_is_read(char **tmp, char **line);
 char				*ft_read_it(char **tmp, int fd);
 int					get_next_line(int fd, char **line);
@@ -76,6 +86,17 @@ void				ft_putnbr(long int n);
 void				ft_putstr(char *s);
 int					ft_numlen(int n);
 char				*ft_strstr(char *haystack, char *needle);
+void				ft_memdel(void **content);
 t_list				*ft_lst_append(t_list *list, void *content);
+t_dlist				*dlst_end(t_dlist *list);
+t_dlist				*dlstnew(void *content);
+void				dlstadd_back(t_dlist **alst, t_dlist *new);
+void				dlstadd_front(t_dlist **alst, t_dlist *new);
+void				dlstclear(t_dlist **lst, void (*del)(void **));
+void				dlstdelone(t_dlist **lst, void (*del)(void **));
+int					dlstsize(t_dlist *lst);
+t_dlist				*dlstfind_node(t_dlist *list, void *content);
+void				dlstinsert_node(t_dlist **alst, t_dlist *pos,
+						t_dlist *new);
 
 #endif

@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 17:53:23 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/11/23 17:53:25 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/06/08 14:29:49 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/06/08 14:32:34 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+long	ft_atol(const char *str)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	size_t			i;
+	long	s;
+	long	r;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	i = 0;
-	while (i <= n)
+	s = 1;
+	r = 0;
+	while (*str && ((*str >= 9 && *str <= 13) || *str == 32))
+		str++;
+	if (*str == '-')
 	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
+		s *= -1;
+		str++;
 	}
-	return (0);
+	else if (*str == '+')
+		str++;
+	while (*str && (*str >= 48 && *str <= 57))
+	{
+		r = r * 10 + *str - 48;
+		str++;
+	}
+	return (r * s);
 }

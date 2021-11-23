@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:58:04 by pgueugno          #+#    #+#             */
-/*   Updated: 2020/11/11 21:12:11 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/11/07 20:54:56 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ char	*ft_strrchr(const char *s, int c)
 	str = (char *)s;
 	a = c;
 	i = 0;
+	if (!s)
+		return (0);
 	while (str[i])
 		i++;
 	while (i > 0)

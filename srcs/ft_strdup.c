@@ -6,7 +6,7 @@
 /*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:56:40 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/06 15:42:18 by pgueugno         ###   ########.fr       */
+/*   Updated: 2021/11/05 23:22:36 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	len = 0;
+	if (!s1)
+		return (0);
 	while (s1[len] != '\0')
 		len++;
 	dst = malloc(sizeof(char) * (len + 1));

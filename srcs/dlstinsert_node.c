@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   dlstinsert_node.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 17:53:23 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/11/23 17:53:25 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/11/23 17:51:00 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/11/23 17:51:02 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(const void *s1, const void *s2, size_t n)
+void	dlstinsert_node(t_dlist **alst, t_dlist *pos, t_dlist *new)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	size_t			i;
+	t_dlist	*iter;
 
-	str1 = (unsigned char *)s1;
-	str2 = (unsigned char *)s2;
-	i = 0;
-	while (i <= n)
+	if (!*alst)
 	{
-		if (str1[i] != str2[i])
-			return (str1[i] - str2[i]);
-		i++;
+		*alst = new;
+		return ;
 	}
-	return (0);
+	iter = *alst;
+	if (pos)
+	{
+		while (iter != pos)
+			iter = iter->next;
+		if (!pos->next)
+		{
+			dlstadd_back(alst, new);
+			return ;
+		}
+		new->next = iter->next;
+		iter->next->prev = new;
+		iter->next = new;
+		new->prev = iter;
+	}
 }

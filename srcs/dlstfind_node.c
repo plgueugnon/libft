@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   dlstfind_node.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pgueugno <pgueugno@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgueugno <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/19 10:31:49 by pgueugno          #+#    #+#             */
-/*   Updated: 2021/01/06 15:54:16 by pgueugno         ###   ########.fr       */
+/*   Created: 2021/11/23 17:50:50 by pgueugno          #+#    #+#             */
+/*   Updated: 2021/11/23 17:50:52 by pgueugno         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void **))
+t_dlist	*dlstfind_node(t_dlist *list, void *content)
 {
-	t_list	*tmp;
+	t_dlist	*tmp;
 
-	tmp = NULL;
-	if (*lst)
+	tmp = list;
+	while (tmp)
 	{
-		while (*lst)
-		{
-			tmp = *lst;
-			*lst = (*lst)->next;
-			del(&tmp->content);
-			free(tmp);
-		}
+		if (!ft_memcmp(tmp->content, content, ft_strlen((char *)content)))
+			return (tmp);
+		tmp = tmp->next;
 	}
-	*lst = NULL;
+	return (0);
 }
